@@ -1,0 +1,338 @@
+{
+  "metadata": {
+    "language_info": {
+      "codemirror_mode": {
+        "name": "python",
+        "version": 3
+      },
+      "file_extension": ".py",
+      "mimetype": "text/x-python",
+      "name": "python",
+      "nbconvert_exporter": "python",
+      "pygments_lexer": "ipython3",
+      "version": "3.8"
+    },
+    "kernelspec": {
+      "name": "python",
+      "display_name": "Python (Pyodide)",
+      "language": "python"
+    }
+  },
+  "nbformat_minor": 4,
+  "nbformat": 4,
+  "cells": [
+    {
+      "cell_type": "code",
+      "source": "import numpy as np",
+      "metadata": {
+        "trusted": true
+      },
+      "execution_count": 24,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": "def order_corner_points(corner_points):\n    \"\"\" This method takes a list of corner points (a list of 2-tuples) and returns the same structure such that\n     the first tuple is the top-left point, second tuple is top-right point, third tuple is bottom-left point, and\n     fourth tuple is bottom-left point.  The scale of this problem will always be small, so we worry about human\n     read-ability above all else. \"\"\"",
+      "metadata": {
+        "trusted": true
+      },
+      "execution_count": 25,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": "# First for loop will find the mins and maxs in each dimension.\n# Assumption: Values do not go above 100,000,000",
+      "metadata": {
+        "trusted": true
+      },
+      "execution_count": 26,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": "min_x, min_y = 100000000, 100000000",
+      "metadata": {
+        "trusted": true
+      },
+      "execution_count": 27,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": "max_x, max_y = 0, 0",
+      "metadata": {
+        "trusted": true
+      },
+      "execution_count": 28,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": "for tup in corner_points:\n    if tup[0] < min_x:\n            min_x = tup[0]\n        if tup[1] < min_y:\n            min_y = tup[1]\n        if tup[0] > max_x:\n            max_x = tup[0]\n        if tup[1] > max_y:\n            max_y = tup[1]\n        continue",
+      "metadata": {
+        "trusted": true
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": "# Now, the mins and maxs have been set.",
+      "metadata": {
+        "trusted": true
+      },
+      "execution_count": 30,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": "# We loop through again to label the points.",
+      "metadata": {
+        "trusted": true
+      },
+      "execution_count": 31,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": "new_corner_points = []\nfor tup in corner_points:\n    if tup[0] == min_x and tup[1] == max_y:\n        new_corner_points.append(tup)\nfor tup in corner_points:\n    if tup[0] == max_x and tup[1] == max_y:\n        new_corner_points.append(tup)\nfor tup in corner_points:\n    if tup[0] == min_x and tup[1] == min_y:\n        new_corner_points.append(tup)\nfor tup in corner_points:\n    if tup[0] == max_x and tup[1] == min_y:\n        new_corner_points.append(tup)",
+      "metadata": {
+        "trusted": true
+      },
+      "execution_count": 32,
+      "outputs": [
+        {
+          "ename": "<class 'NameError'>",
+          "evalue": "name 'corner_points' is not defined",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "Input \u001b[0;32mIn [29]\u001b[0m, in \u001b[0;36m<cell line: 2>\u001b[0;34m()\u001b[0m\n\u001b[1;32m      1\u001b[0m new_corner_points \u001b[38;5;241m=\u001b[39m []\n\u001b[0;32m----> 2\u001b[0m \u001b[38;5;28;01mfor\u001b[39;00m tup \u001b[38;5;129;01min\u001b[39;00m \u001b[43mcorner_points\u001b[49m:\n\u001b[1;32m      3\u001b[0m     \u001b[38;5;28;01mif\u001b[39;00m tup[\u001b[38;5;241m0\u001b[39m] \u001b[38;5;241m==\u001b[39m min_x \u001b[38;5;129;01mand\u001b[39;00m tup[\u001b[38;5;241m1\u001b[39m] \u001b[38;5;241m==\u001b[39m max_y:\n\u001b[1;32m      4\u001b[0m         new_corner_points\u001b[38;5;241m.\u001b[39mappend(tup)\n",
+            "\u001b[0;31mNameError\u001b[0m: name 'corner_points' is not defined"
+          ],
+          "output_type": "error"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": "return new_corner_points",
+      "metadata": {
+        "trusted": true
+      },
+      "execution_count": 20,
+      "outputs": [
+        {
+          "ename": "<class 'SyntaxError'>",
+          "evalue": "'return' outside function (<ipython-input-18-a74e5f6a7267>, line 1)",
+          "traceback": [
+            "\u001b[0;36m  Input \u001b[0;32mIn [18]\u001b[0;36m\u001b[0m\n\u001b[0;31m    return new_corner_points\u001b[0m\n\u001b[0m    ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m 'return' outside function\n"
+          ],
+          "output_type": "error"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": "def get_pixel_dimensions(corner_points, image_dimension):\n    \"\"\" This method takes ordered corner points and an image dimension and finds the width and height of the pixels. \"\"\"\n\n    frame_width = corner_points[1][0] - corner_points[0][0] # top-right x-val minus top-left x-val\n    frame_height = corner_points[0][1] - corner_points[2][0] # top-left y-val minus bottom-left y-val\n\n    # The -1 is because n pixels actually have n-1 line segments to traverse them all.\n    pixel_width = frame_width / (image_dimension[0] - 1.0)\n    pixel_height = frame_height / (image_dimension[1] - 1.0)\n\n    return pixel_width, pixel_height",
+      "metadata": {
+        "trusted": true
+      },
+      "execution_count": 33,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": "def pretty_print_solution(solution):\n    \"\"\" This method prints the solution in a nice human read-able format. \"\"\"\n    print(\"  [\")\n    for row in solution:\n        print(row)\n    print(\"  ]\")\n    return",
+      "metadata": {
+        "trusted": true
+      },
+      "execution_count": 34,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": "def find_solution(corner_points, image_dimension):\n    \"\"\" This method is the master method to find the solution to the main problem.  UN-ORDERED corner points are given\n    and a nxmx2 python list is returned.  \"\"\"",
+      "metadata": {
+        "trusted": true
+      },
+      "execution_count": 35,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": "# First, order the corner points.\ncorner_points = order_corner_points(corner_points)",
+      "metadata": {
+        "trusted": true
+      },
+      "execution_count": 38,
+      "outputs": [
+        {
+          "ename": "<class 'NameError'>",
+          "evalue": "name 'corner_points' is not defined",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "Input \u001b[0;32mIn [35]\u001b[0m, in \u001b[0;36m<cell line: 2>\u001b[0;34m()\u001b[0m\n\u001b[1;32m      1\u001b[0m \u001b[38;5;66;03m# First, order the corner points.\u001b[39;00m\n\u001b[0;32m----> 2\u001b[0m corner_points \u001b[38;5;241m=\u001b[39m order_corner_points(\u001b[43mcorner_points\u001b[49m)\n",
+            "\u001b[0;31mNameError\u001b[0m: name 'corner_points' is not defined"
+          ],
+          "output_type": "error"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": "# Next, find the \"width\" and \"height\" of each pixel.\npixel_width, pixel_height = get_pixel_dimensions(corner_points, image_dimension)",
+      "metadata": {
+        "trusted": true
+      },
+      "execution_count": 39,
+      "outputs": [
+        {
+          "ename": "<class 'NameError'>",
+          "evalue": "name 'corner_points' is not defined",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "Input \u001b[0;32mIn [36]\u001b[0m, in \u001b[0;36m<cell line: 2>\u001b[0;34m()\u001b[0m\n\u001b[1;32m      1\u001b[0m \u001b[38;5;66;03m# Next, find the \"width\" and \"height\" of each pixel.\u001b[39;00m\n\u001b[0;32m----> 2\u001b[0m pixel_width, pixel_height \u001b[38;5;241m=\u001b[39m get_pixel_dimensions(\u001b[43mcorner_points\u001b[49m, image_dimension)\n",
+            "\u001b[0;31mNameError\u001b[0m: name 'corner_points' is not defined"
+          ],
+          "output_type": "error"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": "# Now, we solve by traversing through jumping by the pixel width and height each time.  We fill in the first row,\n# and then move to the second row and so on.",
+      "metadata": {
+        "trusted": true
+      },
+      "execution_count": 41,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": "solution = []\nfirst_point = corner_points[0]\ny_accumulator = first_point[1]\nfor y_traverse_index in range(0, image_dimension[1] - 1):\n        row = []\n        x_accumulator = first_point[0]\n        new_pixel = [x_accumulator, y_accumulator]\n        row.append(new_pixel)",
+      "metadata": {
+        "trusted": true
+      },
+      "execution_count": 47,
+      "outputs": [
+        {
+          "ename": "<class 'NameError'>",
+          "evalue": "name 'corner_points' is not defined",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "Input \u001b[0;32mIn [44]\u001b[0m, in \u001b[0;36m<cell line: 2>\u001b[0;34m()\u001b[0m\n\u001b[1;32m      1\u001b[0m solution \u001b[38;5;241m=\u001b[39m []\n\u001b[0;32m----> 2\u001b[0m first_point \u001b[38;5;241m=\u001b[39m \u001b[43mcorner_points\u001b[49m[\u001b[38;5;241m0\u001b[39m]\n\u001b[1;32m      3\u001b[0m y_accumulator \u001b[38;5;241m=\u001b[39m first_point[\u001b[38;5;241m1\u001b[39m]\n\u001b[1;32m      4\u001b[0m \u001b[38;5;28;01mfor\u001b[39;00m y_traverse_index \u001b[38;5;129;01min\u001b[39;00m \u001b[38;5;28mrange\u001b[39m(\u001b[38;5;241m0\u001b[39m, image_dimension[\u001b[38;5;241m1\u001b[39m] \u001b[38;5;241m-\u001b[39m \u001b[38;5;241m1\u001b[39m):\n",
+            "\u001b[0;31mNameError\u001b[0m: name 'corner_points' is not defined"
+          ],
+          "output_type": "error"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": "for x_traverse_index in range(0, image_dimension[0] - 1):\n        x_accumulator += pixel_width\n        new_pixel = [x_accumulator, y_accumulator]\n        row.append(new_pixel)\n        continue",
+      "metadata": {
+        "trusted": true
+      },
+      "execution_count": 49,
+      "outputs": [
+        {
+          "ename": "<class 'NameError'>",
+          "evalue": "name 'image_dimension' is not defined",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "Input \u001b[0;32mIn [46]\u001b[0m, in \u001b[0;36m<cell line: 1>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0m \u001b[38;5;28;01mfor\u001b[39;00m x_traverse_index \u001b[38;5;129;01min\u001b[39;00m \u001b[38;5;28mrange\u001b[39m(\u001b[38;5;241m0\u001b[39m, \u001b[43mimage_dimension\u001b[49m[\u001b[38;5;241m0\u001b[39m] \u001b[38;5;241m-\u001b[39m \u001b[38;5;241m1\u001b[39m):\n\u001b[1;32m      2\u001b[0m         x_accumulator \u001b[38;5;241m+\u001b[39m\u001b[38;5;241m=\u001b[39m pixel_width\n\u001b[1;32m      3\u001b[0m         new_pixel \u001b[38;5;241m=\u001b[39m [x_accumulator, y_accumulator]\n",
+            "\u001b[0;31mNameError\u001b[0m: name 'image_dimension' is not defined"
+          ],
+          "output_type": "error"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": "# With the last pixel in the row added, we can append the row to our solution.",
+      "metadata": {
+        "trusted": true
+      },
+      "execution_count": 52,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": "solution.append(row)\ncontinue",
+      "metadata": {
+        "trusted": true
+      },
+      "execution_count": 53,
+      "outputs": [
+        {
+          "ename": "<class 'NameError'>",
+          "evalue": "name 'row' is not defined",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "Input \u001b[0;32mIn [50]\u001b[0m, in \u001b[0;36m<cell line: 1>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0m solution\u001b[38;5;241m.\u001b[39mappend(\u001b[43mrow\u001b[49m)\n\u001b[1;32m      2\u001b[0m \u001b[38;5;28;01mcontinue\u001b[39;00m\n",
+            "\u001b[0;31mNameError\u001b[0m: name 'row' is not defined"
+          ],
+          "output_type": "error"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": "return solution\n",
+      "metadata": {
+        "trusted": true
+      },
+      "execution_count": 54,
+      "outputs": [
+        {
+          "ename": "<class 'SyntaxError'>",
+          "evalue": "'return' outside function (<ipython-input-51-e9977f7c82d4>, line 1)",
+          "traceback": [
+            "\u001b[0;36m  Input \u001b[0;32mIn [51]\u001b[0;36m\u001b[0m\n\u001b[0;31m    return solution\u001b[0m\n\u001b[0m    ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m 'return' outside function\n"
+          ],
+          "output_type": "error"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": "if __name__ == '__main__':\n    # Below are examples.  They will be givens by POST call.\n    corner_points = [\n        (1.5, 8.0),\n        (4.0, 8.0),\n        (1.5, 1.5),\n        (4.0, 1.5)\n    ]\n    image_dimension = (5, 5)",
+      "metadata": {
+        "trusted": true
+      },
+      "execution_count": 56,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": "solution = find_solution(corner_points, image_dimension)\n  pretty_print_solution(solution)\n\nprint(\"DONE!\")",
+      "metadata": {
+        "trusted": true
+      },
+      "execution_count": 60,
+      "outputs": [
+        {
+          "ename": "<class 'IndentationError'>",
+          "evalue": "unexpected indent (<ipython-input-57-86d564e892ba>, line 2)",
+          "traceback": [
+            "\u001b[0;36m  Input \u001b[0;32mIn [57]\u001b[0;36m\u001b[0m\n\u001b[0;31m    pretty_print_solution(solution)\u001b[0m\n\u001b[0m    ^\u001b[0m\n\u001b[0;31mIndentationError\u001b[0m\u001b[0;31m:\u001b[0m unexpected indent\n"
+          ],
+          "output_type": "error"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": "",
+      "metadata": {},
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
